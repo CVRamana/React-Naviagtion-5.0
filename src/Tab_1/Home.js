@@ -26,6 +26,7 @@ class Home extends React.Component {
         title="Create Post"
         onPress={()=>this.props.navigation.navigate('CreatePost')}
        / >
+     
       </View>
     );
   }
