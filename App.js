@@ -13,22 +13,57 @@ import Signin from './src/Tab2/Signin';
 import Profile from "./src/Tab_3/Profile";
 import Drawer1 from "./src/Tab4/Drawer1";
 import Drawer2 from "./src/Tab4/Drawer2";
-import { Image, Button, Text, View } from "react-native";
+import MaterialTopTab from "./src/Tab5/MaterialTopTab";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Image, Button, Text, View,StyleSheet,Platform,UIManager,LayoutAnimation } from "react-native";
+import Camera from "./src/Tab5/Camera";
+import Chat from "./src/Tab5/Chat";
+import History from "./src/Tab5/History";
 
-
+const MaterialTopTabContainer = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
-
 const Tab = createBottomTabNavigator();
-
 const Drawer = createDrawerNavigator();
-//Drawer Content
 
+//Material Top Tab bar
+
+function MyTabs({navigation,route}) {
+  navigation.setOptions({ tabBarVisible: route.state ? route.state.index > -1 ? false : true : null });
+  return (
+    <MaterialTopTabContainer.Navigator
+    initialRouteName="Chat"
+      tabBarOptions={{
+        activeTintColor: '#e91e63',
+        inactiveTintColor:"yellow",
+        labelStyle: { fontSize: 12 },
+        showIcon:true,
+        iconStyle:{height:30,width:30,backgroundColor:"red",marginBottom:-30},
+        style: { backgroundColor: 'powderblue' ,marginTop:50},
+      }}
+    >
+      <MaterialTopTabContainer.Screen name="camera" component={Camera} 
+     options={{ 
+       tabBarLabel: '',
+       tabBarIcon:({focused})=>{ 
+      //   console.warn(focused);
+         
+         focused?<Image style={{height:50,width:50,backgroundColor:"green"}}/>:<Image style={{height:50,width:50,backgroundColor:"black"}}/>}
+
+    }}
+      />
+      <MaterialTopTabContainer.Screen name="Chat" component={Chat} />
+      <MaterialTopTabContainer.Screen name="Settings" component={History} />
+    </MaterialTopTabContainer.Navigator>
+  );
+}
+
+
+//Drawer Content
 const DrawerContent = ({
 navigation
 }) => (
-    <View
 
-    >
+    <View >
       <Image style={{ height: 100, width: 100, backgroundColor: "pink", borderRadius: 50 }} />
       <Text>Raman Verma</Text>
       <Button
@@ -39,6 +74,7 @@ navigation
         title="Drawer2"
         onPress={() => navigation.navigate('Drawer2')}
       />
+     
     </View>
   );
 
@@ -95,6 +131,9 @@ function DrawerStack({ route, navigation }) {
     >
       {/* //it is must to define the screens here */}
       <Drawer.Screen name="Drawer1" component={Drawer1}
+      options={{
+        drawerIcon:({focused})=>{focused ? <Image style={styles.icon} />: <Image style={styles.icon} />}
+      }}
       />
       <Drawer.Screen name="Drawer2" component={Drawer2} />
     </Drawer.Navigator>
@@ -150,7 +189,14 @@ export default function App() {
         <Tab.Screen name="Auth" component={AuthStack} />
         <Tab.Screen name="Profile" component={ProfileStack} />
         <Tab.Screen name="Drawer" component={DrawerStack} />
+        <Tab.Screen name="MyTabs" component={MyTabs} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
+const styles=StyleSheet.create({
+  icon:{
+    height:50,width:50,
+    backgroundColor:"yellow"
+  }
+})

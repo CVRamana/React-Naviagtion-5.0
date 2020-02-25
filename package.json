@@ -7,12 +7,15 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "pod":"cd ios && pod install && cd ..",
+    "gitt":"git status && git add . "
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/bottom-tabs": "^5.0.6",
     "@react-navigation/drawer": "^5.0.7",
+    "@react-navigation/material-top-tabs": "^5.0.7",
     "@react-navigation/native": "^5.0.6",
     "@react-navigation/stack": "^5.0.6",
     "react": "16.9.0",
@@ -21,6 +24,7 @@
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.0.0-beta.8",
+    "react-native-tab-view": "^2.13.0",
     "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
