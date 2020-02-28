@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity,
   Platform,
-  StatusBar, Image,
+  StatusBar,
   I18nManager,
 } from 'react-native';
 import DefaultSlide from './DefaultSlide';
@@ -15,42 +15,39 @@ import DefaultSlide from './DefaultSlide';
 const { width, height } = Dimensions.get('window');
 
 const slides = [
-  {
-    key: 'somethun',
-    title: 'Create your story',
-    text: 'Description.\nSay something cool',
-    image: require('../public/group.png'),
-    // backgroundColor: '#59b2ab',
-  },
-  {
-    key: 'somethun-dos',
-    title: 'follow your story',
-    text: 'Other cool stuff',
-    image: require('../public/group-6.png'),
-    // backgroundColor: '#febe29',
-  },
-  {
-    key: 'somethun1',
-    title: 'share your story',
-    text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
-    image: require('../public/group-4.png'),
-    //  backgroundColor: '#22bcb5',
-  }
-];
+    {
+      key: 'somethun',
+      title: 'Create your story',
+      text: 'Description.\nSay something cool',
+      image: require('../public/group.png'),
+      // backgroundColor: '#59b2ab',
+    },
+    {
+      key: 'somethun-dos',
+      title: 'follow your story',
+      text: 'Other cool stuff',
+      image: require('../public/group-6.png'),
+      // backgroundColor: '#febe29',
+    },
+    {
+      key: 'somethun1',
+      title: 'share your story',
+      text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
+      image: require('../public/group-4.png'),
+      //  backgroundColor: '#22bcb5',
+    }
+  ];
+  
 
 const isIphoneX =
   Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS && (height === 812 || width === 812);
 
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
 
-export default class CreatePost extends React.Component {
+export default class AppIntroSlider extends React.Component {
   static defaultProps = {
     activeDotStyle: {
-      // backgroundColor: 'rgba(255, 255, 255, .9)',
-      backgroundColor: "green",
-      width: 20,
-      height: 10,
-
+      backgroundColor: 'rgba(255, 255, 255, .9)',
     },
     dotStyle: {
       backgroundColor: 'rgba(0, 0, 0, .2)',
@@ -93,7 +90,6 @@ export default class CreatePost extends React.Component {
   };
 
   _onPaginationPress = index => {
-
     const activeIndexBeforeChange = this.state.activeIndex;
     this.goToSlide(index);
     this.props.onSlideChange && this.props.onSlideChange(index, activeIndexBeforeChange);
@@ -107,8 +103,8 @@ export default class CreatePost extends React.Component {
         {this.props.renderItem ? (
           this.props.renderItem(props)
         ) : (
-            <DefaultSlide bottomButton={this.props.bottomButton} {...props} />
-          )}
+          <DefaultSlide bottomButton={this.props.bottomButton} {...props} />
+        )}
       </View>
     );
   };
@@ -123,37 +119,9 @@ export default class CreatePost extends React.Component {
 
   _renderDefaultButton = name => {
     let content = (
-      // <Text style={[styles.buttonText, this.props.buttonTextStyle]}>
-      //   {this.props[`${name.toLowerCase()}Label`]}
-      // </Text>
-      <View style={{
-        position: "absolute",
-        bottom: -240,
-        right: 10
-      }}>
-        {name != "Done" ?
-          <TouchableOpacity
-            onPress={this._onNextPress}
-            style={{ height: 20, width: 50, backgroundColor: "#24994f" }}>
-            <Image
-            //source={require('../public/')}
-            />
-          </TouchableOpacity> :
-          <View
-            style={styles.getStarted}>
-            <TouchableOpacity
-              style={styles.getBack}
-              activeOpacity={1}
-              onPress={this._onPrevPress} >
-              <Image
-                style={{ height: 20, width: 40, }} />
-            </TouchableOpacity>
-            <TouchableOpacity style={{ height: 20, width: 40 ,marginRight:10}}>
-              <Text style={{ color: "green", }}>Get Started</Text>
-            </TouchableOpacity>
-          </View>
-        }
-      </View>
+      <Text style={[styles.buttonText, this.props.buttonTextStyle]}>
+        {this.props[`${name.toLowerCase()}Label`]}
+      </Text>
     );
     if (this.props.bottomButton) {
       content = (
@@ -161,7 +129,7 @@ export default class CreatePost extends React.Component {
           style={[
             styles.bottomButton,
             (name === 'Skip' || name === 'Prev') && {
-              backgroundColor: 'blue',
+              backgroundColor: 'transparent',
             },
             this.props.buttonStyle,
           ]}
@@ -178,12 +146,12 @@ export default class CreatePost extends React.Component {
       name === 'Skip' || name === 'Prev' ? styles.leftButtonContainer : styles.rightButtonContainer;
     return (
       <View style={!this.props.bottomButton && style}>
-        <View
-          //onPress={onPress}
+        <TouchableOpacity
+          onPress={onPress}
           style={this.props.bottomButton ? styles.flexOne : this.props.buttonStyle}
         >
           {content}
-        </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -314,7 +282,7 @@ const styles = StyleSheet.create({
   },
   paginationContainer: {
     position: 'absolute',
-    bottom: 216 + (isIphoneX ? 34 : 0),
+    bottom: 16 + (isIphoneX ? 34 : 0),
     left: 16,
     right: 16,
   },
@@ -334,7 +302,6 @@ const styles = StyleSheet.create({
   leftButtonContainer: {
     position: 'absolute',
     left: 0,
-    backgroundColor: "green"
   },
   rightButtonContainer: {
     position: 'absolute',
@@ -345,24 +312,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, .3)',
     alignItems: 'center',
     justifyContent: 'center',
-    color: "green"
   },
   buttonText: {
     backgroundColor: 'transparent',
-    color: 'green',
+    color: 'white',
     fontSize: 18,
     padding: 12,
   },
-  getStarted: {
-    flexDirection: "row",
-    padding: 5,
-    justifyContent: "space-between",
-    height: 35,
-    width: 380,
-    //backgroundColor: "yellow"
-  },
-  getBack: {
-    height: 20,
-    width: 30,
-  }
 });

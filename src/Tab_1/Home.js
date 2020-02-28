@@ -15,7 +15,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1,backgroundColor:"red"}}>
+      <View style={{flex:1,backgroundColor:"lightgrey",marginTop:100}}>
         <Text> Home </Text>
      
         <Button

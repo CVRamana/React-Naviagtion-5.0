@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react';
 import { Text, View ,Button} from 'react-native';
+import Courasel from "./Courasel";
 
 const Details = ({
     params,navigation
@@ -21,6 +22,10 @@ const Details = ({
             <Button
         title="Go back to first screen in stack"
         onPress={() => navigation.popToTop()}/>
+        <Text> Lets make Courasel</Text>
+<View style={{height:500,width:"100%",backgroundColor:"yellow"}}>
+      <Courasel/>
+      </View>
 
  
     </View>

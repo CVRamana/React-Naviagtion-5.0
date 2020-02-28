@@ -10,7 +10,7 @@ class Signin extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{marginTop:40}}>
         <Text> Signin </Text>
         <Button
         title="Login"
