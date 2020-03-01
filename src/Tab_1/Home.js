@@ -20,7 +20,7 @@ class Home extends React.Component {
      
         <Button
         title="Go to Details"
-        onPress={()=>this.props.navigation.navigate('Details')}
+        onPress={()=>this.props.navigation.navigate('Details',{id:101,name:"raman"})}
        />
        <Button
         title="Create Post"
